@@ -1,6 +1,6 @@
 package com.in28minutes.springboot.learnjpaandhibernate.course;
 
-import com.in28minutes.springboot.learnjpaandhibernate.course.jpa.CourseJpaRepository;
+import com.in28minutes.springboot.learnjpaandhibernate.course.springdatajpa.CourseSpringDataJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,8 +17,11 @@ public class CourseCommandLineRunner implements CommandLineRunner {
 //  private CourseJdbcRepository repository;
 
   // jpa
+//  @Autowired
+//  private CourseJpaRepository repository;
+
   @Autowired
-  private CourseJpaRepository repository;
+  private CourseSpringDataJpaRepository repository;
 
   /*
   * spring application 시작시 실행할 논리가 있는 경우
@@ -29,6 +32,8 @@ public class CourseCommandLineRunner implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
 
+    // jdbc + jpa
+    /*
     repository.insert(
         new Course(1, "Learn AWS Jpa!", "in28minutes")
     );
@@ -43,5 +48,22 @@ public class CourseCommandLineRunner implements CommandLineRunner {
 
     System.out.println(repository.findById( 2 ));
     System.out.println(repository.findById( 3 ));
+    */
+
+    // Spring Data Jpa
+    repository.save(
+        new Course(1, "Learn AWS Jpa!", "in28minutes")
+    );
+    repository.save(
+        new Course(2, "Learn Azure Jpa!", "in28minutes")
+    );
+    repository.save(
+        new Course(3, "Learn DevOps Jpa!", "in28minutes")
+    );
+
+    repository.deleteById( 1L );
+
+    System.out.println(repository.findById( 2L ));
+    System.out.println(repository.findById( 3L ));
   }
 }
