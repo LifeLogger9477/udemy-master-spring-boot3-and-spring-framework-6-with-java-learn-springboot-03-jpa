@@ -1,13 +1,23 @@
 package com.in28minutes.springboot.learnjpaandhibernate.course;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 /**
  * author : ms.Lee
  * date   : 2024-01-08
  */
+@Entity
 public class Course {
 
+  @Id
   private long id;
+
+  @Column(name = "name")
   private String name;
+
+  @Column(name = "author")
   private String author;
 
   // constructor

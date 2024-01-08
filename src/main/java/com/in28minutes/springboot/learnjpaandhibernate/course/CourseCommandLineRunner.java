@@ -1,6 +1,6 @@
-package com.in28minutes.springboot.learnjpaandhibernate.course.jdbc;
+package com.in28minutes.springboot.learnjpaandhibernate.course;
 
-import com.in28minutes.springboot.learnjpaandhibernate.course.Course;
+import com.in28minutes.springboot.learnjpaandhibernate.course.jpa.CourseJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,15 @@ import org.springframework.stereotype.Component;
  * date   : 2024-01-08
  */
 @Component
-public class CourseJdbcCommandLineRunner implements CommandLineRunner {
+public class CourseCommandLineRunner implements CommandLineRunner {
 
+  // jdbc
+//  @Autowired
+//  private CourseJdbcRepository repository;
+
+  // jpa
   @Autowired
-  private CourseJdbcRepository repository;
+  private CourseJpaRepository repository;
 
   /*
   * spring application 시작시 실행할 논리가 있는 경우
@@ -25,13 +30,13 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     repository.insert(
-        new Course(1, "Learn AWS Now!", "in28minutes")
+        new Course(1, "Learn AWS Jpa!", "in28minutes")
     );
     repository.insert(
-        new Course(2, "Learn Azure Now!", "in28minutes")
+        new Course(2, "Learn Azure Jpa!", "in28minutes")
     );
     repository.insert(
-        new Course(3, "Learn DevOps Now!", "in28minutes")
+        new Course(3, "Learn DevOps Jpa!", "in28minutes")
     );
 
     repository.deleteById( 1 );
