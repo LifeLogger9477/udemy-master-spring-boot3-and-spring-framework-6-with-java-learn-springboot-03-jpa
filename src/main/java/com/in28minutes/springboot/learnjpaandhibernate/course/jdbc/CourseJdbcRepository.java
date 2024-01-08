@@ -1,5 +1,6 @@
 package com.in28minutes.springboot.learnjpaandhibernate.course.jdbc;
 
+import com.in28minutes.springboot.learnjpaandhibernate.course.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,14 +23,31 @@ public class CourseJdbcRepository {
             )
             values
             (
-                1,
-                'Learn AWS',
-                'in28minutes'
+                ?,
+                ?,
+                ?
             );
       """;
 
-  public void insert() {
+  private static String DELETE_QUERY =
+      """
+        delete 
+        from course 
+        where id = ? 
+      """;
 
-    springJdbcTemplate.update( INSERT_QUERY );
+  public void insert(Course course) {
+
+    springJdbcTemplate.update(
+        INSERT_QUERY,
+        course.getId(),
+        course.getName(),
+        course.getAuthor()
+    );
+  }
+
+  public void deleteById(long id) {
+
+    springJdbcTemplate.update( DELETE_QUERY, id );
   }
 }
